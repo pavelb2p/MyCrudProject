@@ -1,0 +1,5 @@
+db.ExamDB.UsersCollExam.insertMany([
+{name: "aaa", age: 22, email:"aaa@aaa", hasCar: true},
+{name: "bbb", age: 33, email:"bbb@bbb", hasCar: false},
+{name: "ccc", age: 44, email:"ccc@ccc", hasCar: false}
+])
