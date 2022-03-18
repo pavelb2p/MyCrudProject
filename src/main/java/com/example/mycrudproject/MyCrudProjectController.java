@@ -8,6 +8,6 @@ public class MyCrudProjectController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Hello from MyCrudProjectController";
+        return "Hello from MyCrudProjectController and first commit Feature";
     }
 }
