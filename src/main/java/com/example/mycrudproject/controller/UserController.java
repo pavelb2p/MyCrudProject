@@ -4,38 +4,34 @@ import com.example.mycrudproject.entity.User;
 import com.example.mycrudproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/save")
-    public User saveUser(@RequestBody User user){
-        return userService.saveUser(user);
+    @PostMapping("/users")
+    public User saveUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 
-    @GetMapping("/list")
-    public List<User> getUsers(){
+    @GetMapping("/users")
+    public List<User> getUsers() {
         return userService.getUsers();
     }
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "Hello from CRUD";
-    }
-
-    @PutMapping("/update/{user_id}")
+    @PutMapping("/users/{userId}")
     public User updateUser(@RequestBody User user,
-                           @PathVariable("user_id") Long id){
+                           @PathVariable("userId") Long id) {
         return userService.updateUser(id, user);
     }
 
-    @DeleteMapping("/delete/{user_id}")
-    public String deleteUser(@PathVariable("user_id") Long id){
+    @DeleteMapping("/users/{userId}")
+    public String deleteUser(@PathVariable("userId") Long id) {
         userService.deleteUser(id);
 
         return "delete successfully";

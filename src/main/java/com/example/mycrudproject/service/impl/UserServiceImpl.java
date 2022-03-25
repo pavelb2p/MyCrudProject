@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User saveUser(User user) {
+    public User createUser(User user) {
         return userRepository.save(user);
     }
 
@@ -28,13 +28,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(Long id, User user) {
         Optional<User> findById = userRepository.findById(id);
-        if(findById.isPresent()){
+        if (findById.isPresent()) {
             User userEntity = findById.get();
-            if(user.getName() != null && !user.getName().isEmpty()){
+            if (user.getName() != null && !user.getName().isEmpty()) {
                 userEntity.setName(user.getName());
-                if(user.getAge() != null){
+                if (user.getAge() != null) {
                     userEntity.setAge(user.getAge());
-                 return userRepository.save(userEntity);
+                    return userRepository.save(userEntity);
                 }
             }
         }
