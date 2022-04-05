@@ -30,15 +30,11 @@ public class UserServiceImpl implements UserService {
         Optional<User> findById = userRepository.findById(id);
         if (findById.isPresent()) {
             User userEntity = findById.get();
-            if (user.getName() != null && !user.getName().isEmpty()) {
-                userEntity.setName(user.getName());
-                if (user.getAge() != null) {
-                    userEntity.setAge(user.getAge());
-                    return userRepository.save(userEntity);
-                }
-            }
+            userEntity.setName(user.getName());
+            userEntity.setAge(user.getAge());
+            return userRepository.save(userEntity);
         }
-        return null;
+        return user;
     }
 
     @Override

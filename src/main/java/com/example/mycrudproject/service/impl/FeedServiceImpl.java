@@ -12,7 +12,6 @@ public class FeedServiceImpl implements FeedService {
     @Autowired
     private FeedRepository feedRepository;
 
-
     @Override
     public Feed saveFeed(Feed feed) {
         return feedRepository.save(feed);

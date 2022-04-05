@@ -22,5 +22,4 @@ public class Feed {
     private String sourceDisplayName;
     private String sourceSiteUrl;
     private String description;
-
 }
