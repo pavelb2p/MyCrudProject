@@ -1,5 +1,7 @@
 package com.example.mycrudproject.exception;
 
-public class UserNotFoundException extends RuntimeException{
-    public UserNotFoundException (String message){super(message);}
+public class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException(String message) {
+        super(message);
+    }
 }

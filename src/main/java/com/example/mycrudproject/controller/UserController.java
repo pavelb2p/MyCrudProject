@@ -21,7 +21,7 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @   GetMapping("/list")
+    @GetMapping("/list")
     public Optional<List<User>> getUsers() {
         return userService.getUsers();
     }
