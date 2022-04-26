@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
 
-//@Entity
-//@Table(name = "users")
+
 @Document
 @Data
 @AllArgsConstructor

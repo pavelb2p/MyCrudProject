@@ -12,6 +12,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Feed {
+
     @Id
     @JsonProperty("recipeId")
     private String id;

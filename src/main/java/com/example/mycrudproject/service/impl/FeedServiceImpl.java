@@ -13,7 +13,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class FeedServiceImpl implements FeedService {
-
     private final FeedRepository feedRepository;
 
     public Feed saveFeed(Feed feed) {

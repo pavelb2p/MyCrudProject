@@ -2,7 +2,6 @@ package com.example.mycrudproject.service;
 
 import com.example.mycrudproject.entity.User;
 import com.example.mycrudproject.exception.UserNotFoundException;
-
 import java.util.List;
 import java.util.Optional;
 

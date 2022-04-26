@@ -21,13 +21,13 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @GetMapping("/list")
+    @   GetMapping("/list")
     public Optional<List<User>> getUsers() {
         return userService.getUsers();
     }
 
     @PutMapping("/{userId}/update")
-    public User updateUser(@RequestBody User user) {
+    public User updateUser(@RequestBody User user, @PathVariable String userId) {
         return userService.updateUser(user);
     }
 
