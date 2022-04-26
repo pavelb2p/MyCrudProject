@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface FeedService {
     Feed saveFeed(Feed feed);
+
     Optional<List<Feed>> getFeeds();
+
     Feed updateFeed(Feed feed);
+
     void deleteFeed(String stringId);
 }

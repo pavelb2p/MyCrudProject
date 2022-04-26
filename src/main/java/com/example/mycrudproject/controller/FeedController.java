@@ -22,20 +22,19 @@ public class FeedController {
     }
 
     @GetMapping("/list")
-    public Optional<List<Feed>> getFeeds(){
+    public Optional<List<Feed>> getFeeds() {
         return feedService.getFeeds();
     }
 
     @PutMapping("/{recipeId}/update")
-    public Feed updateFeed(@RequestBody Feed feed, @PathVariable String recipeId){
+    public Feed updateFeed(@RequestBody Feed feed, @PathVariable String recipeId) {
         return feedService.updateFeed(feed);
     }
 
     @DeleteMapping("/{recipeId}/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteFeed(@PathVariable String recipeId){
+    public void deleteFeed(@PathVariable String recipeId) {
         feedService.deleteFeed(recipeId);
-
     }
 
 }

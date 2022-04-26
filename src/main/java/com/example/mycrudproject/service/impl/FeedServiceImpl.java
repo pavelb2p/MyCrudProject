@@ -16,13 +16,13 @@ public class FeedServiceImpl implements FeedService {
 
     private final FeedRepository feedRepository;
 
-    public Feed saveFeed(Feed feed) { return feedRepository.save(feed);
+    public Feed saveFeed(Feed feed) {
+        return feedRepository.save(feed);
     }
 
     public Optional<List<Feed>> getFeeds() {
         return Optional.of(feedRepository.findAll());
     }
-
 
     public Feed updateFeed(Feed feed) {
         feedRepository.findById(feed.getId())
@@ -30,12 +30,9 @@ public class FeedServiceImpl implements FeedService {
         return feedRepository.save(feed);
     }
 
-
     public void deleteFeed(String id) {
         Feed feedFound = feedRepository.findById(id)
                 .orElseThrow(() -> new FeedNotFoundException("Feed with " + id + "not found(delete)"));
         feedRepository.delete(feedFound);
-
-
     }
 }
