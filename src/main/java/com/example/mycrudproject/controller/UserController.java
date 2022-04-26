@@ -2,37 +2,38 @@ package com.example.mycrudproject.controller;
 
 import com.example.mycrudproject.entity.User;
 import com.example.mycrudproject.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/")
+@RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    final UserService userService;
 
-    @PostMapping("/users")
+    @PostMapping("/save")
     public User saveUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
-    @GetMapping("/users")
-    public List<User> getUsers() {
+    @GetMapping("/list")
+    public Optional<List<User>> getUsers() {
         return userService.getUsers();
     }
 
-    @PutMapping("/users/{userId}")
-    public User updateUser(@RequestBody User user,
-                           @PathVariable("userId") Long id) {
-        return userService.updateUser(id, user);
-    }
+//    @PutMapping("/{userId}/update")
+//    public User updateUser(@RequestBody User user) {
+//        return userService.updateUser(user);
+//    }
 
-    @DeleteMapping("/users/{userId}")
-    public String deleteUser(@PathVariable("userId") Long id) {
+    @DeleteMapping("/{userId}/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable("userId") Long id) {
         userService.deleteUser(id);
-        return "delete successfully";
+//        return "delete successfully"; слышу
     }
 }

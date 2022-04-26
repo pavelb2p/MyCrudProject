@@ -1,43 +1,51 @@
 package com.example.mycrudproject.service.impl;
 
 import com.example.mycrudproject.entity.User;
+import com.example.mycrudproject.exception.UserNotFoundException;
 import com.example.mycrudproject.repository.UserRepository;
 import com.example.mycrudproject.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Override
     public User createUser(User user) {
         return userRepository.save(user);
     }
 
-    @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public Optional<List<User>> getUsers() {
+        return Optional.of(userRepository.findAll());
     }
 
-    @Override
-    public User updateUser(Long id, User user) {
-        Optional<User> findById = userRepository.findById(id);
-        if (findById.isPresent()) {
-            User userEntity = findById.get();
-            userEntity.setName(user.getName());
-            userEntity.setAge(user.getAge());
-            return userRepository.save(userEntity);
-        }
-        return user;
+    public User updateUser(User user) {
+        userRepository.findById(user.getId())
+                .orElseThrow(() -> new UserNotFoundException("User with " + user.getId() + "not found"));
+        return userRepository.save(user);
     }
+//        Optional<User> findById = userRepository.findById(id)   ;
+//        if (findById.isPresent()) {
+//            User userEntity = findById.get();
+//            userEntity.setName(user.getName());
+//            userEntity.setAge(user.getAge());
+//            return userRepository.save(userEntity);
+//        }else {
+//            throw new UserNotFoundException("User with " + id + "not found");
+//        }
 
-    @Override
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public void deleteUser(Long id) throws UserNotFoundException {
+        User userFound = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        userRepository.delete(userFound);
+//        boolean present = userRepository.findById(id).isPresent();
+//        if(present){
+//            userRepository.deleteById(id);
+//        }
+//        else System.out.println("User with " + id + " not found! Can't delete");
     }
 }
