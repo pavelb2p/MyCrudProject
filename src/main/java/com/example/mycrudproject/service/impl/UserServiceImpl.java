@@ -25,14 +25,16 @@ public class UserServiceImpl implements UserService {
     }
 
     public User updateUser(User user, Long userId) {
-        userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User with " + userId + "not found"));
-        return userRepository.save(user);
+        if (userRepository.findById(userId).isPresent()) {
+            return userRepository.save(user);
+        } else {
+            throw new UserNotFoundException("Can't update! User with".concat(String.valueOf(userId)).concat("not found"));
+        }
     }
 
     public void deleteUser(Long userId) {
         User userFound = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("Can't delete! User with ".concat(String.valueOf(userId)).concat("not found")));
         userRepository.delete(userFound);
     }
 }

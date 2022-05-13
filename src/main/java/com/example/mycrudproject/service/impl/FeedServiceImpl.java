@@ -25,14 +25,16 @@ public class FeedServiceImpl implements FeedService {
     }
 
     public Feed updateFeed(Feed feed, String recipeId) {
-        feedRepository.findById(recipeId)
-                .orElseThrow(() -> new FeedNotFoundException("Can't update! Feed with " + recipeId + "not found"));
-        return feedRepository.save(feed);
+        if (feedRepository.findById(recipeId).isPresent()) {
+            return feedRepository.save(feed);
+        } else {
+            throw new FeedNotFoundException("Can't update! Feed with ".concat(recipeId).concat(" not found"));
+        }
     }
 
     public void deleteFeed(String recipeId) {
         Feed feedFound = feedRepository.findById(recipeId)
-                .orElseThrow(() -> new FeedNotFoundException("Can't delete! Feed with " + recipeId + "not found"));
+                .orElseThrow(() -> new FeedNotFoundException("Can't delete! Feed with ".concat(recipeId).concat("not found")));
         feedRepository.delete(feedFound);
     }
 }

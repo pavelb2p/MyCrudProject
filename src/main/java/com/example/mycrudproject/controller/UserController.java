@@ -1,5 +1,7 @@
 package com.example.mycrudproject.controller;
 
+import com.example.mycrudproject.dto.UserDTO;
+import com.example.mycrudproject.dto.mapperdto.UserDtoMapper;
 import com.example.mycrudproject.entity.User;
 import com.example.mycrudproject.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,20 +26,26 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserDtoMapper userDtoMapper;
 
     @PostMapping("/save")
-    public User saveUser(@RequestBody User user) {
+    @ResponseStatus(HttpStatus.OK)
+    public User saveUser(@Valid @RequestBody UserDTO userDTO) {
+        User user = userDtoMapper.convertToModel(userDTO);
         return userService.createUser(user);
     }
 
     @GetMapping("/list")
+    @ResponseStatus(HttpStatus.OK)
     public List<User> getUsers() {
         return userService.getUsers()
                 .orElseGet(Collections::emptyList);
     }
 
     @PutMapping("/{userId}/update")
-    public User updateUser(@RequestBody User user, @PathVariable Long userId) {
+    @ResponseStatus(HttpStatus.OK)
+    public User updateUser(@Valid @RequestBody UserDTO userDTO, @PathVariable Long userId) {
+        User user = userDtoMapper.convertToModel(userDTO);
         return userService.updateUser(user, userId);
     }
 
