@@ -9,7 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -30,9 +32,10 @@ class FeedServiceImplTest {
             "https://www.themeatballshop.com",
             "Daniel Holzman started cooking at age 15");
 
+    private FeedServiceImpl sut;
+
     @Mock
     private FeedRepository feedRepository;
-    private FeedServiceImpl sut;
 
     @BeforeEach
     void setUp() {
@@ -48,15 +51,20 @@ class FeedServiceImplTest {
 
     @Test
     void shouldGetAllFeedsSuccessfully() {
-        feedRepository.findAll();
+        List<Feed> feedList = new ArrayList<>();
+        feedList.add(feed);
+        when(feedRepository.findAll()).thenReturn(feedList);
+        sut.getFeeds();
         verify(feedRepository, times(1)).findAll();
+        assertThat(sut.getFeeds()).isNotEmpty();
     }
 
     @Test
     void shouldReturnEmptyListIfFeedIsNotPresent() {
         when(feedRepository.findAll()).thenReturn(Collections.emptyList());
-        assertThat(feedRepository.findAll()).isNotNull();
+        sut.getFeeds();
         verify(feedRepository, times(1)).findAll();
+        assertThat(feedRepository.findAll()).isNotNull();
     }
 
     @Test
