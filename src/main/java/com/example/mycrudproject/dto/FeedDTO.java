@@ -1,23 +1,19 @@
-package com.example.mycrudproject.entity;
+package com.example.mycrudproject.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Document(collection = "feeds")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Feed {
+public class FeedDTO {
 
-    @Id
     @JsonProperty("recipeId")
     private String id;
 

@@ -4,6 +4,7 @@ target/
 !/lib/*.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+!**/src/main/resources/META-INF/application-dev.properties
 
 ### STS ###
 .apt_generated
