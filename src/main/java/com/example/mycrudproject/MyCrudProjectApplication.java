@@ -8,5 +8,4 @@ public class MyCrudProjectApplication {
     public static void main(String[] args) {
         SpringApplication.run(MyCrudProjectApplication.class, args);
     }
-    //cherry-pick commit
 }
