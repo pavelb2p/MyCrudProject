@@ -11,7 +11,9 @@ public class MyCrudAppConfig {
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
+        return builder
+                .defaultHeader("provide on request", "provide on request")
+                .build();
     }
 
     @Bean
